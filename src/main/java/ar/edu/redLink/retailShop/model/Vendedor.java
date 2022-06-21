@@ -10,12 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "vendedor")
 public class Vendedor {
 
 	@Id
