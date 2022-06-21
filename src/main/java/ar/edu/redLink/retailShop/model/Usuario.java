@@ -23,7 +23,6 @@ import lombok.Setter;
 import net.minidev.json.annotate.JsonIgnore;
 
 @Entity
-@Data
 public class Usuario {
 
     @Id
@@ -56,5 +55,51 @@ public class Usuario {
 	
 	public boolean esVendedor() {
 		return rol == RolUsuario.VENDEDOR;
+	}
+
+	public Usuario() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Usuario(UUID id, @NotBlank @Email String username, @NotBlank @Size(min = 8, max = 15) String password,
+			RolUsuario rol) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.rol = rol;
+	}
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public RolUsuario getRol() {
+		return rol;
+	}
+
+	public void setRol(RolUsuario rol) {
+		this.rol = rol;
 	}
 }
