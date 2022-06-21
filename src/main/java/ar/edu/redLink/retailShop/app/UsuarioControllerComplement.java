@@ -1,19 +1,17 @@
 package ar.edu.redLink.retailShop.app;
 
+
 import java.util.Optional;
-
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Build;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
+import ar.edu.redLink.retailShop.model.Cliente;
+import ar.edu.redLink.retailShop.model.RolUsuario;
 import ar.edu.redLink.retailShop.model.Usuario;
 import ar.edu.redLink.retailShop.model.Vendedor;
 
@@ -21,25 +19,47 @@ import ar.edu.redLink.retailShop.model.Vendedor;
 public class UsuarioControllerComplement {
 
 	@Autowired
-	RepoUsuarioSpring repoUsuarioSpring;
+	UsuarioRepoREST repoUsuarioSpring;
 	
 	
 	@Autowired
-	RepoVendedor repoVendedor ;
+	VendedorRepoREST repoVendedor ;
 	
-	@Transactional
-	@RequestMapping(method = RequestMethod.GET, path = "/vendedores/pepe/{usuarioId}")
-	@ResponseBody
-	public ResponseEntity<Vendedor> getVendedor(
-			@PathVariable("usuarioId") Integer usuarioId ) {
-		
-		Optional<Vendedor> opcionalUsuario = repoVendedor.findById(usuarioId);
-		if(opcionalUsuario.isEmpty()) {
-			return ResponseEntity.notFound().build();
-		}
-		Vendedor vendedor = opcionalUsuario.get();
-		return ResponseEntity.accepted().body(vendedor);
-	}
+	
+	@Autowired
+	ClienteRepoREST repoCliente;
+
+	
+	@CrossOrigin
+	@RequestMapping(method = RequestMethod.POST, path = "/usuarios/login")
+    public ResponseEntity<ResponseLogin> getLogin(@RequestBody Usuario usuario) {
+
+    	ResponseLogin response = new ResponseLogin();
+    	
+    	System.out.println(usuario);
+    	Optional<Usuario> usuarioABuscar = repoUsuarioSpring.findByUsername(usuario.getUsername());
+    	if (usuarioABuscar.isEmpty()) {
+    		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    	}
+    	
+    	if (!(usuarioABuscar.get().getPassword().equals(usuario.getPassword())) ) {
+    		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    	}
+    	
+    	if (usuarioABuscar.get().getRol() == RolUsuario.VENDEDOR) {
+        	Optional<Vendedor> vendedorABuscar = repoVendedor.findByUsuarioId(usuarioABuscar.get().getId());
+        	response.setIdRol(vendedorABuscar.get().getId());
+    	}
+    	
+    	if (usuarioABuscar.get().getRol() == RolUsuario.CLIENTE) {
+        	Optional<Cliente> clienteABuscar = repoCliente.findByUsuarioId(usuarioABuscar.get().getId());
+        	response.setIdRol(clienteABuscar.get().getId());
+    	}    	
+    	    	
+    	response.setId(usuarioABuscar.get().getId());
+    	response.setRol(usuarioABuscar.get().getRol());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 	
 	
 }

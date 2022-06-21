@@ -6,6 +6,7 @@ public enum TipoProducto {
 	TECNOLOGIA,
 	ALIMENTOS,
 	FARMACIA,
-	INSUMOS
+	VEHICULO,
+	OTROS
 
 }

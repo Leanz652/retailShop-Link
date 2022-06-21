@@ -1,5 +1,10 @@
 package ar.edu.redLink.retailShop.model;
 
+
+import java.time.LocalDate;
+import java.util.Optional;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -7,85 +12,51 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+import ar.edu.redLink.retailShop.app.Image;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Producto {
 
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
 	@Enumerated
+	@NotNull
 	private TipoProducto tipoProducto;
+	
+	@NotNull
 	private Double precio;
+	@NotBlank
 	private String nombre;
+	@NotBlank
+	@Column(length=1000000)
 	private String descripcion;
+	
+	@ManyToOne
+	private Vendedor vendedor;
+	
+	@OneToOne
+	private Image imagen; 
+	
+	private LocalDate fechaDePublicacion;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="PROVEEDOR_ID")
 	private Proveedor proveedorDeProducto;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public TipoProducto getTipoProducto() {
-		return tipoProducto;
-	}
-
-	public void setTipoProducto(TipoProducto tipoProducto) {
-		this.tipoProducto = tipoProducto;
-	}
-
-	public Double getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(Double precio) {
-		this.precio = precio;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public Proveedor getProveedorDeProducto() {
-		return proveedorDeProducto;
-	}
-
-	public void setProveedorDeProducto(Proveedor proveedorDeProducto) {
-		this.proveedorDeProducto = proveedorDeProducto;
-	}
-
-	public Producto(TipoProducto tipoProducto, Double precio, String nombre, String descripcion,
-			Proveedor proveedorDeProducto) {
-		super();
-		this.tipoProducto = tipoProducto;
-		this.precio = precio;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.proveedorDeProducto = proveedorDeProducto;
-	}
-
-	public Producto() {
-		super();
-	}
 
 	
 	
