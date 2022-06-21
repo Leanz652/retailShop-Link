@@ -57,7 +57,7 @@ public class OrdenCompraControllerComplement {
 		itemProducto.setPruductoSeleccionado(productoBuscado.get());
 
 		OrdenCompra ordenCompra = new OrdenCompra();
-		ordenCompra.setClienteComprador(clienteBuscado.get());
+		ordenCompra.setComprador(clienteBuscado.get());
 		ordenCompra.setFechaCompra(LocalDate.now());
 		ordenCompra.setItemsComprados(itemProducto);
 

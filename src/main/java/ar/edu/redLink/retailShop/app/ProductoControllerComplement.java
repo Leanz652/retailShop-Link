@@ -65,7 +65,7 @@ VendedorRepoREST repoVendedor;
 	  productoFinal.setDescripcion(productoACrear.getDescripcion());
 	  productoFinal.setTipoProducto(productoACrear.getTipoProducto());
 	  productoFinal.setVendedor(vendedor.get());
-	  productoFinal.setProveedorDeProducto(proveedor.get());
+	  productoFinal.setProveedor(proveedor.get());
 	  productoFinal.setFechaDePublicacion(LocalDate.now());
 
 	  repoProducto.save(productoFinal);

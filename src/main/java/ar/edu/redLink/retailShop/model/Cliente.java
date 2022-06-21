@@ -48,7 +48,7 @@ public class Cliente {
 	private String numeroDocumento;
 	private String telefono;
 	
-	@OneToMany( mappedBy = "clienteComprador" ,cascade = CascadeType.ALL)
+	@OneToMany( mappedBy = "comprador" ,cascade = CascadeType.ALL)
 	private Collection<OrdenCompra> comprasEfectuadas;
 	
 	@OneToMany(cascade = CascadeType.ALL)

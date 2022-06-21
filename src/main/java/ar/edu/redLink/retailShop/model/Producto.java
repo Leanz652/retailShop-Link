@@ -23,7 +23,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="productos")
 public class Producto {
 
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,6 +41,7 @@ public class Producto {
 	private String descripcion;
 	
 	@ManyToOne
+	@JoinColumn(name = "vendedor_id")
 	private Vendedor vendedor;
 	
 	@OneToOne
@@ -51,8 +51,8 @@ public class Producto {
 	
 	
 	@ManyToOne
-	@JoinColumn(name="PROVEEDOR_ID")
-	private Proveedor proveedorDeProducto;
+	@JoinColumn(name="proveedor_id")
+	private Proveedor proveedor;
 
 	
 	

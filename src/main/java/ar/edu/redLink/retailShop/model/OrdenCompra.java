@@ -27,11 +27,11 @@ public class OrdenCompra {
 	private Integer id;
 
 	@ManyToOne
-	@JoinColumn(name = "CLIENTE_ID", referencedColumnName = "id")
-	private Cliente clienteComprador;
+	@JoinColumn(name = "comprador_id")
+	private Cliente comprador;
 	
 	@ManyToOne
-	@JoinColumn(name = "VENDEDOR_ID", referencedColumnName = "id")
+	@JoinColumn(name = "vendedor_id")
 	private Vendedor vendedor;
 	
 	private LocalDate fechaCompra;
