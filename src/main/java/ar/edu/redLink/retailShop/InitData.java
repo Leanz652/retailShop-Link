@@ -32,7 +32,8 @@ import ar.edu.redLink.retailShop.model.Vendedor;
 @Component
 public class InitData implements CommandLineRunner {
 
-
+	@Autowired
+	UsuarioRepoREST repoUsuario;
 
 	@Autowired
 	ProveedorRepoREST repoProveedor;
@@ -59,17 +60,20 @@ public class InitData implements CommandLineRunner {
 	
 	@Autowired
 	PromocionesRepoREST repoPromo;
-	
-	@Autowired
-	UsuarioRepoREST repoUsuario;
 
 	@Transactional
 	@Override
 	public void run(String... args) throws Exception {
+		// TODO Auto-generated method stub
+//		config.getProjectionConfiguration().addProjection(AlumnoDTO2.class);
 		config.exposeIdsFor(Producto.class, Promociones.class, Cupones.class);
 
-		if (repoProducto.count() != 0) { return; }
+		// config.exposeIdsFor(OrdenDeCompra.class);
+
+		
+		  if (repoUsuario.count() != 0) { return; }
 		 
+
 		// Creacion de proveedores
 		Proveedor proveedor1 = new Proveedor();
 		proveedor1.setRazonSocial("DIARCO S.A");
@@ -104,11 +108,12 @@ public class InitData implements CommandLineRunner {
 		cliente2.setPassword("123456789");
 		cliente2.setUsername("cliente2@cliente.com.ar");
 		cliente2.setRol(RolUsuario.CLIENTE);
-		
-		repoUsuario.save(vendedor1);
-		repoUsuario.save(vendedor2);
-		repoUsuario.save(cliente2);
-		repoUsuario.save(cliente1);
+
+		List<Usuario> usuariosIniciales = Arrays.asList(vendedor1, vendedor2, cliente2);
+
+		usuariosIniciales.stream().forEach(usuario -> {
+			repoUsuario.save(usuario);
+		});
 
 		// Creacion de compradores
 		Cliente comprador1 = new Cliente();
@@ -143,7 +148,7 @@ public class InitData implements CommandLineRunner {
 		producto1.setTipoProducto(TipoProducto.INDUMENTARIA);
 		producto1.setNombre("Campera Inflable Negra Super Abrigada Con Capucha");
 		producto1.setPrecio(6586.00);
-		producto1.setProveedor(proveedor1);
+		producto1.setProveedorDeProducto(proveedor1);
 		producto1.setFechaDePublicacion(LocalDate.now());
 		producto1.setVendedor(vendedor22);
 		producto1.setDescripcion("Descripción\r\n"
@@ -156,31 +161,37 @@ public class InitData implements CommandLineRunner {
 				+ "-SUPER ABRIGADAS\r\n"
 				+ "\r\n");
 
+		producto1.setActivo(true);
+		
+		
 		Producto producto2 = new Producto();
 		producto2.setTipoProducto(TipoProducto.TECNOLOGIA);
 		producto2.setNombre("Televisor 42'' ULTRA HD ");
 		producto2.setPrecio(51999.00);
-		producto2.setProveedor(proveedor1);
+		producto2.setProveedorDeProducto(proveedor1);
 		producto2.setFechaDePublicacion(LocalDate.now());
 		producto2.setVendedor(vendedor22);
 		producto2.setDescripcion("TCL es una de las empresas líderes en la industria global de televisores, dedicada a la investigación y desarrollo de productos electrónicos. Orientada a la satisfacción de sus clientes, se distingue por proveer una excelente experiencia a quienes adquieran y usen sus diferentes líneas de electrodomésticos.\r\n"
 				+ "Con el Smart TV L42S6500 vas a acceder a las aplicaciones en las que se encuentran tus contenidos favoritos. Además, podés navegar por Internet, interactuar en redes sociales y divertirte con videojuegos.");
-
+		producto2.setActivo(true);
+		
 		Producto producto3 = new Producto();
 		producto3.setTipoProducto(TipoProducto.TECNOLOGIA);
 		producto3.setNombre("Placa de video AMD Sapphire Pulse Radeon RX 6500");
 		producto3.setPrecio(50350.00);
-		producto3.setProveedor(proveedor2);
+		producto3.setProveedorDeProducto(proveedor2);
 		producto3.setFechaDePublicacion(LocalDate.now());
 		producto3.setVendedor(vendedor22);
+		producto3.setActivo(true);
 		producto3.setDescripcion("AMD es un fabricante estadounidense de placas de video, por su tecnología se ha destacado en crear "
 				+ "procesadores de alta gama que permiten un excelente funcionamiento del motor gráfico de tu computadora.");
 
 		Producto producto4 = new Producto();
+		producto4.setActivo(true);
 		producto4.setTipoProducto(TipoProducto.TECNOLOGIA);
 		producto4.setNombre("Auriculares in-ear gamer inalámbricos Haylou GT Series GT1 negro");
 		producto4.setPrecio(2959.00);
-		producto4.setProveedor(proveedor1);
+		producto4.setProveedorDeProducto(proveedor1);
 		producto4.setFechaDePublicacion(LocalDate.now());
 		producto4.setVendedor(vendedor11);
 		producto4.setDescripcion("Descripción\r\n"
@@ -190,10 +201,11 @@ public class InitData implements CommandLineRunner {
 				+ "Al ser in-ear, mejoran la calidad del audio y son de tamaño pequeño para poder insertarse en tu oreja. Son ideales para acompañarte a la hora de hacer ejercicio mientras te sumergís en el mejor sonido envolvente.");
 
 		Producto producto5 = new Producto();
+		producto5.setActivo(true);
 		producto5.setTipoProducto(TipoProducto.INDUMENTARIA);
 		producto5.setNombre("Pantalón Jogging Jogger Babucha Con Cierres Frizado");
 		producto5.setPrecio(2469.00);
-		producto5.setProveedor(proveedor1);
+		producto5.setProveedorDeProducto(proveedor1);
 		producto5.setFechaDePublicacion(LocalDate.now());
 		producto5.setVendedor(vendedor11);
 		producto5.setDescripcion("Descripción\r\n"
@@ -204,10 +216,11 @@ public class InitData implements CommandLineRunner {
 		
 		
 		Producto producto6 = new Producto();
+		producto6.setActivo(true);
 		producto6.setTipoProducto(TipoProducto.VEHICULO);
 		producto6.setNombre("Volkswagen amarok 3.0 258cv v6 comfortline");
 		producto6.setPrecio(6000000.00);
-		producto6.setProveedor(proveedor1);
+		producto6.setProveedorDeProducto(proveedor1);
 		producto6.setFechaDePublicacion(LocalDate.now());
 		producto6.setVendedor(vendedor11);
 		producto6.setDescripcion("RETIRAS EN 15 DÍAS REALES.\r\n"
@@ -223,10 +236,11 @@ public class InitData implements CommandLineRunner {
 
 		
 		Producto producto7 = new Producto();
+		producto7.setActivo(true);
 		producto7.setTipoProducto(TipoProducto.VEHICULO);
 		producto7.setNombre("Peugeot 208 1.6 Allure Nav Tiptronic - Usado");
 		producto7.setPrecio(2580000.00);
-		producto7.setProveedor(proveedor1);
+		producto7.setProveedorDeProducto(proveedor1);
 		producto7.setFechaDePublicacion(LocalDate.now());
 		producto7.setVendedor(vendedor11);
 		producto7.setDescripcion("Listo para transferir, muy bueno digno de ver, detalles a la vista, precio publicado de contado" + "Con garantía de fábrica\r\n"
@@ -238,10 +252,11 @@ public class InitData implements CommandLineRunner {
 		
 		
 		Producto producto8 = new Producto();
+		producto8.setActivo(true);
 		producto8.setTipoProducto(TipoProducto.INDUMENTARIA);
 		producto8.setNombre("Jaguar 4325 Hombre Adultos\r\n");
 		producto8.setPrecio(7477.00);
-		producto8.setProveedor(proveedor1);
+		producto8.setProveedorDeProducto(proveedor1);
 		producto8.setFechaDePublicacion(LocalDate.now());
 		producto8.setVendedor(vendedor11);
 		producto8.setDescripcion("Jaguar cuenta con una completa línea de calzados especialmente pensados para sus clientes. Sus productos son novedosos y cómodos. Se adaptan a tu rutina.\r\n"
@@ -253,10 +268,11 @@ public class InitData implements CommandLineRunner {
 		
 		
 		Producto producto9 = new Producto();
+		producto9.setActivo(true);
 		producto9.setTipoProducto(TipoProducto.INDUMENTARIA);
 		producto9.setNombre("Topper Dakota Hombre Adultos");
 		producto9.setPrecio(11399.00);
-		producto9.setProveedor(proveedor1);
+		producto9.setProveedorDeProducto(proveedor1);
 		producto9.setFechaDePublicacion(LocalDate.now());
 		producto9.setVendedor(vendedor11);
 		producto9.setDescripcion("Topper se destaca en el mercado por ofrecer productos de calidad, confort y diseño que unen moda y deporte. Acerca tendencias y busca que las personas puedan verse y sentirse bien dentro y fuera del campo de juego.\r\n"
@@ -267,10 +283,11 @@ public class InitData implements CommandLineRunner {
 		
 		
 		Producto producto10 = new Producto();
+		producto10.setActivo(true);
 		producto10.setTipoProducto(TipoProducto.INDUMENTARIA);
 		producto10.setNombre("Topper Boro II Hombre Adultos");
 		producto10.setPrecio(9398.00);
-		producto10.setProveedor(proveedor1);
+		producto10.setProveedorDeProducto(proveedor1);
 		producto10.setFechaDePublicacion(LocalDate.now());
 		producto10.setVendedor(vendedor11);
 		producto10.setDescripcion("Topper se destaca en el mercado por ofrecer productos de calidad, confort y diseño que unen moda y deporte. Acerca tendencias y busca que las personas puedan verse y sentirse bien dentro y fuera del campo de juego.\r\n"
@@ -333,20 +350,20 @@ public class InitData implements CommandLineRunner {
 		orden1.setItemsComprados(item1);
 		orden1.setFechaCompra(LocalDate.now());
 		orden1.setVendedor(vendedor11);
-		orden1.setComprador(comprador1);		
+		orden1.setClienteComprador(comprador1);		
 		
 		OrdenCompra orden2 = new OrdenCompra();
 		orden2.setItemsComprados(item2);
 		orden2.setFechaCompra(LocalDate.now());
 		orden2.setVendedor(vendedor11);
-		orden2.setComprador(comprador1);		
+		orden2.setClienteComprador(comprador1);		
 		
 		
 		OrdenCompra orden3 = new OrdenCompra();
 		orden3.setItemsComprados(item3);
 		orden3.setFechaCompra(LocalDate.now());
 		orden3.setVendedor(vendedor22);
-		orden3.setComprador(comprador2);		
+		orden3.setClienteComprador(comprador2);		
 		
 		repoOrdenDeCompra.save(orden1);
 		repoOrdenDeCompra.save(orden2);

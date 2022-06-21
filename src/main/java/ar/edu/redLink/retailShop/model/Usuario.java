@@ -28,8 +28,7 @@ public class Usuario {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", updatable = false, nullable = false, unique=true, columnDefinition = "BINARY(16)")
-    private UUID id;
+    private String id;
 
 	@NotBlank
 	@Email
@@ -62,8 +61,8 @@ public class Usuario {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Usuario(UUID id, @NotBlank @Email String username, @NotBlank @Size(min = 8, max = 15) String password,
-			RolUsuario rol) {
+	public Usuario(String id, @NotBlank @Email String username, @NotBlank @Size(min = 8, max = 15) String password,
+					RolUsuario rol) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -71,11 +70,11 @@ public class Usuario {
 		this.rol = rol;
 	}
 
-	public UUID getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

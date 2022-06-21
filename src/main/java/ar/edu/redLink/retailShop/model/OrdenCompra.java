@@ -12,14 +12,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name="orden_compra")
 public class OrdenCompra {
 	
 	
@@ -27,11 +25,11 @@ public class OrdenCompra {
 	private Integer id;
 
 	@ManyToOne
-	@JoinColumn(name = "comprador_id")
-	private Cliente comprador;
+	@JoinColumn(name = "CLIENTE_ID", referencedColumnName = "id")
+	private Cliente clienteComprador;
 	
 	@ManyToOne
-	@JoinColumn(name = "vendedor_id")
+	@JoinColumn(name = "VENDEDOR_ID", referencedColumnName = "id")
 	private Vendedor vendedor;
 	
 	private LocalDate fechaCompra;

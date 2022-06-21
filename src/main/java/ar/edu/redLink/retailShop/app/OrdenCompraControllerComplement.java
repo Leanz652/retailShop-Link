@@ -44,7 +44,7 @@ public class OrdenCompraControllerComplement {
 	@Transactional
 	@PostMapping("/ordenes/purchase")
 	public ResponseEntity<Object> finalizarCompra(@RequestParam("producto") Integer producto_id,
-			@RequestParam("idComprador") UUID comprador_id, @RequestParam("cupon") Integer cupon_id,
+			@RequestParam("idComprador") String comprador_id, @RequestParam("cupon") Integer cupon_id,
 			@RequestParam("factura") String factura) throws IOException {
 
 		Optional<Producto> productoBuscado = repoProducto.findById(producto_id);
@@ -57,7 +57,7 @@ public class OrdenCompraControllerComplement {
 		itemProducto.setPruductoSeleccionado(productoBuscado.get());
 
 		OrdenCompra ordenCompra = new OrdenCompra();
-		ordenCompra.setComprador(clienteBuscado.get());
+		ordenCompra.setClienteComprador(clienteBuscado.get());
 		ordenCompra.setFechaCompra(LocalDate.now());
 		ordenCompra.setItemsComprados(itemProducto);
 

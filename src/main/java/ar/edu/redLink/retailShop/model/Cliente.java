@@ -31,8 +31,7 @@ public class Cliente {
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-	@Column(name = "id", updatable = false, nullable = false, unique=true, columnDefinition = "BINARY(16)")
-	private UUID id;
+	private String id;
 	
 	@NotBlank
 	private String nombre;
@@ -48,23 +47,10 @@ public class Cliente {
 	private String numeroDocumento;
 	private String telefono;
 	
-	@OneToMany( mappedBy = "comprador" ,cascade = CascadeType.ALL)
+	@OneToMany( mappedBy = "clienteComprador" ,cascade = CascadeType.ALL)
 	private Collection<OrdenCompra> comprasEfectuadas;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	private Collection<Tarjeta> tarjetasRegistradas;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@NotNull
-	private Usuario usuario;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private CarritoCompra carritoItems;
-	
-	@ManyToMany
-	@JoinTable(
-			name = "CLIENTES_MEMBRESIAS",
-			joinColumns = @JoinColumn(name = "CLIENTE_ID", referencedColumnName = "id"),
-			inverseJoinColumns = @JoinColumn(name = "MEMBRESIAS_ID", referencedColumnName = "id"))
-	private Collection<Membresias> suscripciones;	
+	private Usuario usuario;	
 }

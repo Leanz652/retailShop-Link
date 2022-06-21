@@ -11,7 +11,7 @@
   
   
   @RepositoryRestResource(path = "usuarios") public interface UsuarioRepoREST
-  extends PagingAndSortingRepository<Usuario, UUID> {
+  extends PagingAndSortingRepository<Usuario, String> {
   
   
   List<Usuario> findAll();
@@ -20,7 +20,7 @@
   
   @Override
   
-  @RestResource(exported = false) void deleteById(UUID id);
+  @RestResource(exported = false) void deleteById(String id);
   
   @Override
   

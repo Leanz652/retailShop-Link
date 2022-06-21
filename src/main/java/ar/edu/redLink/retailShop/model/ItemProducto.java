@@ -10,9 +10,9 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
-@Entity
+
 @Data
-@Table(name="item_producto")
+@Entity
 public class ItemProducto {
 
 
@@ -20,7 +20,6 @@ public class ItemProducto {
 	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name= "PRODUCTO_ID")
 	private Producto pruductoSeleccionado;
 		
 	private int cantidad;

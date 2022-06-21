@@ -2,7 +2,6 @@ package ar.edu.redLink.retailShop.model;
 
 import java.util.Collection;
 import java.util.UUID;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -10,10 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
-import lombok.Data;
 
 @Entity
 public class Vendedor {
@@ -21,8 +17,7 @@ public class Vendedor {
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-	@Column(updatable = false, nullable = false, unique=true, columnDefinition = "BINARY(16)")
-	private UUID id;
+	private String id;
 	
 	private String nombre;
 	
@@ -36,14 +31,14 @@ public class Vendedor {
 	@OneToMany (mappedBy="vendedor")
 	private Collection<Producto> productosPublicados;
 	  
-	@OneToMany(mappedBy = "vendedor", cascade = CascadeType.ALL) 
+	@OneToMany(mappedBy = "vendedor") 
 	private Collection<OrdenCompra> ventasRealizadas;
 
-	public UUID getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -95,7 +90,7 @@ public class Vendedor {
 		this.ventasRealizadas = ventasRealizadas;
 	}
 
-	public Vendedor(UUID id, String nombre, TipoDNI tipoDni, String dni, Usuario usuario,
+	public Vendedor(String id, String nombre, TipoDNI tipoDni, String dni, Usuario usuario,
 			Collection<Producto> productosPublicados, Collection<OrdenCompra> ventasRealizadas) {
 		super();
 		this.id = id;

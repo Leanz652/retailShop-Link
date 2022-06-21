@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class ResponseLogin {
 
-	private UUID id;
+	private String id;
 	private RolUsuario rol;	
-	private UUID idRol;
+	private String idRol;
 }

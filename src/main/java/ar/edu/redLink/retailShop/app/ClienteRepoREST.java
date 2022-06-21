@@ -13,14 +13,14 @@ import ar.edu.redLink.retailShop.model.Cliente;
 
 @CrossOrigin
 @RepositoryRestResource(path = "clientes")
-public interface ClienteRepoREST extends PagingAndSortingRepository<Cliente, UUID> {
+public interface ClienteRepoREST extends PagingAndSortingRepository<Cliente, String> {
 	
 	
-	Optional<Cliente> findByUsuarioId(UUID id);
+	Optional<Cliente> findByUsuarioId(String id);
 	
 	@Override
 	@RestResource(exported = false)
-	void deleteById(UUID id);
+	void deleteById(String id);
 	
 	@Override
 	@RestResource(exported = false)
