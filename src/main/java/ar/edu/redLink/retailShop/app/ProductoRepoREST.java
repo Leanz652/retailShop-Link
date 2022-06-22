@@ -9,7 +9,7 @@ import ar.edu.redLink.retailShop.app.DTO.ProductoDTO;
 import ar.edu.redLink.retailShop.model.Producto;
 
 @CrossOrigin
-@RepositoryRestResource(path = "produ",excerptProjection = ProductoDTO.class)
+@RepositoryRestResource(path = "productos",excerptProjection = ProductoDTO.class)
 public interface ProductoRepoREST extends PagingAndSortingRepository<Producto, Integer> {
 
 		
