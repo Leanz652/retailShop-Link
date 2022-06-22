@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProductoDTO {
+public class ProductoDTO2 {
 	private Double precio;
 	private TipoProducto tipoProducto;
 	private String descripcion;

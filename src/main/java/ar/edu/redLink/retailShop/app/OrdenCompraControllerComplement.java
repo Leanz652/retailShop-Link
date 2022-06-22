@@ -54,7 +54,7 @@ public class OrdenCompraControllerComplement {
 		ItemProducto itemProducto = new ItemProducto();
 		itemProducto.setCantidad(1);
 		itemProducto.setPrecioUnitario(productoBuscado.get().getPrecio());
-		itemProducto.setPruductoSeleccionado(productoBuscado.get());
+		itemProducto.setProductoSeleccionado(productoBuscado.get());
 
 		OrdenCompra ordenCompra = new OrdenCompra();
 		ordenCompra.setClienteComprador(clienteBuscado.get());

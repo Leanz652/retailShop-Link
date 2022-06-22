@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 
 import ar.edu.redLink.retailShop.model.Producto;
-import ar.edu.redLink.retailShop.model.ProductoDTO;
+import ar.edu.redLink.retailShop.model.ProductoDTO2;
 import ar.edu.redLink.retailShop.model.Proveedor;
 import ar.edu.redLink.retailShop.model.Vendedor;
 
@@ -49,7 +49,7 @@ public class ProductoControllerComplement {
 		imagenRepository.save(imagenProducto);
 
 		Gson g = new Gson();
-		ProductoDTO productoACrear = g.fromJson(producto, ProductoDTO.class);
+		ProductoDTO2 productoACrear = g.fromJson(producto, ProductoDTO2.class);
 
 		Optional<Vendedor> vendedor = repoVendedor.findByUsuarioId(idVendedor);
 		Optional<Proveedor> proveedor = repoProveedor.findByRazonSocial(productoACrear.getProveedor());

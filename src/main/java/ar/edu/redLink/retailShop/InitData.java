@@ -10,6 +10,7 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ar.edu.redLink.retailShop.app.ClienteRepoREST;
+import ar.edu.redLink.retailShop.app.Image;
 import ar.edu.redLink.retailShop.app.ItemProductoRepoREST;
 import ar.edu.redLink.retailShop.app.OrdenCompraRepoREST;
 import ar.edu.redLink.retailShop.app.ProductoRepoREST;
@@ -66,7 +67,7 @@ public class InitData implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 //		config.getProjectionConfiguration().addProjection(AlumnoDTO2.class);
-		config.exposeIdsFor(Producto.class, Promociones.class, Cupones.class);
+		config.exposeIdsFor(Producto.class, Promociones.class, Cupones.class, Image.class);
 
 		// config.exposeIdsFor(OrdenDeCompra.class);
 
@@ -312,32 +313,32 @@ public class InitData implements CommandLineRunner {
 		ItemProducto item1 = new ItemProducto();
 		item1.setCantidad(2);
 		item1.setPrecioUnitario(10.00);
-		item1.setPruductoSeleccionado(producto1);
+		item1.setProductoSeleccionado(producto1);
 
 		ItemProducto item2 = new ItemProducto();
 		item2.setCantidad(1);
 		item2.setPrecioUnitario(10.00);
-		item2.setPruductoSeleccionado(producto2);
+		item2.setProductoSeleccionado(producto2);
 
 		ItemProducto item3 = new ItemProducto();
 		item3.setCantidad(3);
 		item3.setPrecioUnitario(10.00);
-		item3.setPruductoSeleccionado(producto3);
+		item3.setProductoSeleccionado(producto3);
 
 		ItemProducto item4 = new ItemProducto();
 		item4.setCantidad(4);
 		item4.setPrecioUnitario(10.00);
-		item4.setPruductoSeleccionado(producto3);
+		item4.setProductoSeleccionado(producto3);
 
 		ItemProducto item5 = new ItemProducto();
 		item5.setCantidad(5);
 		item5.setPrecioUnitario(10.00);
-		item5.setPruductoSeleccionado(producto4);
+		item5.setProductoSeleccionado(producto4);
 
 		ItemProducto item6 = new ItemProducto();
 		item6.setCantidad(6);
 		item6.setPrecioUnitario(10.00);
-		item6.setPruductoSeleccionado(producto5);
+		item6.setProductoSeleccionado(producto5);
 
 		List<ItemProducto> itemsIniciales = Arrays.asList(item1, item2, item3, item4, item5, item6);
 

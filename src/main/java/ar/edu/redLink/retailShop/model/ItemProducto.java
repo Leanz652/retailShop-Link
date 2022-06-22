@@ -20,7 +20,7 @@ public class ItemProducto {
 	private Integer id;
 	
 	@ManyToOne
-	private Producto pruductoSeleccionado;
+	private Producto productoSeleccionado;
 		
 	private int cantidad;
 	private Double precioUnitario;
