@@ -348,20 +348,20 @@ public class InitData implements CommandLineRunner {
 
 		// Creacion de ordenes de compra
 		OrdenCompra orden1 = new OrdenCompra();
-		orden1.setItemsComprados(item1);
+		orden1.setItemComprado(item1);
 		orden1.setFechaCompra(LocalDate.now());
 		orden1.setVendedor(vendedor11);
 		orden1.setClienteComprador(comprador1);		
 		
 		OrdenCompra orden2 = new OrdenCompra();
-		orden2.setItemsComprados(item2);
+		orden2.setItemComprado(item2);
 		orden2.setFechaCompra(LocalDate.now());
 		orden2.setVendedor(vendedor11);
 		orden2.setClienteComprador(comprador1);		
 		
 		
 		OrdenCompra orden3 = new OrdenCompra();
-		orden3.setItemsComprados(item3);
+		orden3.setItemComprado(item3);
 		orden3.setFechaCompra(LocalDate.now());
 		orden3.setVendedor(vendedor22);
 		orden3.setClienteComprador(comprador2);		

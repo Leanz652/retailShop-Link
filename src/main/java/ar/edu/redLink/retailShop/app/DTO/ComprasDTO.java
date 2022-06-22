@@ -15,11 +15,9 @@ public interface ComprasDTO {
 
 	@Value("#{target.itemsComprados.productoSeleccionado}")
 	ProductoDTO getItemsComprados();
-
 	  Vendedor getVendedor();
-	  
+	 
 	  LocalDate getFechaCompra();
-	  
 	  String getId();
 	 
 

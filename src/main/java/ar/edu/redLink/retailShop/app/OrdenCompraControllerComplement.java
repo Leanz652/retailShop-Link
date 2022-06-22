@@ -59,7 +59,7 @@ public class OrdenCompraControllerComplement {
 		OrdenCompra ordenCompra = new OrdenCompra();
 		ordenCompra.setClienteComprador(clienteBuscado.get());
 		ordenCompra.setFechaCompra(LocalDate.now());
-		ordenCompra.setItemsComprados(itemProducto);
+		ordenCompra.setItemComprado(itemProducto);
 
 		if (!cuponBuscado.isEmpty()) {
 			ordenCompra.setPromocionesAplicadas(Arrays.asList(cuponBuscado.get()));

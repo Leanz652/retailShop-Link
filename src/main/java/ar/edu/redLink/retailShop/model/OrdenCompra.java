@@ -35,7 +35,7 @@ public class OrdenCompra {
 	private LocalDate fechaCompra;
 
 	@OneToOne
-	private ItemProducto itemsComprados;
+	private ItemProducto itemComprado;
 	
 	@ManyToMany
 	@JoinTable(
