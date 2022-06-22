@@ -13,8 +13,8 @@ import ar.edu.redLink.retailShop.model.Vendedor;
 @Projection(name = "compras", types = { OrdenCompra.class })
 public interface ComprasDTO {
 
-	@Value("#{target.itemsComprados.productoSeleccionado}")
-	ProductoDTO getItemsComprados();
+	@Value("#{target.itemComprado.productoSeleccionado}")
+	ProductoDTO getItemComprado();
 	  Vendedor getVendedor();
 	 
 	  LocalDate getFechaCompra();
